@@ -108,76 +108,85 @@ export default function Cart() {
     }
 
     return (
-        <div className="grid grid-cols-3 gap-6 p-6">
+        <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto">
 
-        
+            {/* GRID */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            {/* 🛒 LEFT: CART ITEMS */}
-            <div className="col-span-2">
-                <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
+                {/* 🛒 CART ITEMS */}
+                <div className="lg:col-span-2">
+                    <h2 className="text-xl sm:text-2xl font-bold mb-4">
+                        🛒 Shopping Cart
+                    </h2>
 
-                {/* {items.length === 0 && <p>Your cart is empty</p>} */}
-                
-
-                {items.map((item) => (
-                    <div
-                        key={item.productId}
-                        className="flex justify-between items-center border p-4 mb-3 rounded shadow-sm"
-                    >
-                        <div>
-                            <h3 className="font-semibold">{item.title}</h3>
-                            <p className="text-gray-600">₹ {item.price}</p>
-                        </div>
-
-                        {/* Quantity Controls */}
-                        <div className="flex items-center gap-2">
-                            <button
-                                className="bg-gray-200 px-2"
-                                onClick={() => dispatch(decreaseQty(item.productId))}
-                            >
-                                -
-                            </button>
-
-                            <span>{item.quantity}</span>
-
-                            <button
-                                className="bg-gray-200 px-2"
-                                onClick={() => dispatch(increaseQty(item.productId))}
-                            >
-                                +
-                            </button>
-                        </div>
-
-                        {/* Remove */}
-                        <button
-                            className="text-red-500"
-                            onClick={() => dispatch(removeFromCart(item.productId))}
+                    {items.map((item) => (
+                        <div
+                            key={item.productId}
+                            className="flex flex-col sm:flex-row sm:justify-between sm:items-center border p-3 sm:p-4 mb-3 rounded shadow-sm gap-3"
                         >
-                            Remove
-                        </button>
-                    </div>
-                ))}
-            </div>
+                            {/* LEFT */}
+                            <div>
+                                <h3 className="font-semibold text-sm sm:text-base">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600 text-sm">
+                                    ₹ {item.price}
+                                </p>
+                            </div>
 
-            {/* 💰 RIGHT: SUMMARY */}
-            <div className="border p-4 rounded shadow h-fit sticky top-4">
-                <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+                            {/* CENTER: Quantity */}
+                            <div className="flex items-center gap-2">
+                                <button
+                                    className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
+                                    onClick={() => dispatch(decreaseQty(item.productId))}
+                                >
+                                    -
+                                </button>
 
-                <p className="mb-2">
-                    Subtotal ({items.length} items):{" "}
-                    <span className="font-semibold">₹ {totalAmount.toFixed(2)}</span>
-                </p>
+                                <span className="min-w-[20px] text-center">
+                                    {item.quantity}
+                                </span>
 
-                {/* <button
-                    className="bg-yellow-400 w-full py-2 font-semibold mt-3"
-                    onClick={handleCheckout}
-                > */}
-                <button
-                    className="bg-yellow-400 w-full py-2 font-semibold mt-3"
-                    onClick={handlePayment}
-                >
-                    Proceed to Checkout
-                </button>
+                                <button
+                                    className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
+                                    onClick={() => dispatch(increaseQty(item.productId))}
+                                >
+                                    +
+                                </button>
+                            </div>
+
+                            {/* RIGHT: Remove */}
+                            <button
+                                className="text-red-500 text-sm hover:underline"
+                                onClick={() => dispatch(removeFromCart(item.productId))}
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                {/* 💰 ORDER SUMMARY */}
+                <div className="border p-4 rounded shadow h-fit lg:sticky lg:top-4 bg-white">
+                    <h3 className="text-lg sm:text-xl font-bold mb-4">
+                        💰 Order Summary
+                    </h3>
+
+                    <p className="mb-2 text-sm sm:text-base">
+                        Subtotal ({items.length} items):
+                        <span className="font-semibold ml-1">
+                            ₹ {totalAmount.toFixed(2)}
+                        </span>
+                    </p>
+
+                    <button
+                        className="bg-yellow-400 w-full py-2 rounded font-semibold mt-3 hover:bg-yellow-500 transition disabled:opacity-50"
+                        onClick={handlePayment}
+                        disabled={loading}
+                    >
+                        {loading ? "Processing..." : "Proceed to Checkout"}
+                    </button>
+                </div>
             </div>
         </div>
     );
