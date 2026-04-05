@@ -1,0 +1,628 @@
+
+***********************************************************
+npm create vite@latest react-ecommerce-frontend -- --template react
+***********************************************************
+
+cd react-ecommerce-frontend
+code .
+=============================================================
+GOOGLE SEARCH
+react js vite with tailwind css
+https://tailwindcss.com/docs/installation/using-vite
+
+npm install tailwindcss @tailwindcss/vite
+
+vite.config.js
+import tailwindcss from '@tailwindcss/vite'
+tailwindcss()
+
+index.css
+@import "tailwindcss";
+=============================================================
+npm run dev
+=============================================================
+TEST TAILWIND CSS INSTALLATION:
+------------------------------
+TO TEST TAILWIND CSS INSTALLATION, HAVE THE FOLLOWING IN App.jsx FILE
+<h1 className="text-3xl font-bold underline text-red-500">
+        Hello world!
+      </h1>
+
+=============================================================
+A simple but complete frontend to test your backend:
+
+Features:
+✅ Product List
+✅ Add to Cart
+✅ Cart Page (increase/decrease/remove)
+✅ Place Order (Razorpay later if needed)
+✅ Orders List
+✅ Login (JWT)
+=============================================================
+📁 2. Recommended Folder Structure
+
+Inside src/:
+src/
+ ├── api/
+ │    └── axios.js
+ ├── components/
+ │    ├── Navbar.jsx
+ │    ├── ProductCard.jsx
+ ├── pages/
+ │    ├── Products.jsx
+ │    ├── Cart.jsx
+ │    ├── Orders.jsx
+ │    ├── Login.jsx
+ ├── store/
+ │    └── cartStore.js
+ ├── App.jsx
+ ├── main.jsx
+=============================================================
+🔌 3. Install Required Packages
+npm install axios react-router-dom 
+🚀 1. Install Redux Toolkit
+npm install @reduxjs/toolkit react-redux
+
+npm install lucide-react
+npm install jwt-decode
+📦 Step 1: Install cookie helper
+npm install js-cookie
+=============================================================
+🧠 2. Folder Structure Update
+src/
+ ├── store/
+ │    ├── store.js
+ │    └── slices/
+ │         ├── cartSlice.js
+ │         ├── productSlice.js
+ │         └── authSlice.js
+=============================================================
+🏗️ 3. Create Store
+📄 store/store.js
+=============================================================
+🔗 4. Connect Redux to App
+📄 main.jsx
+=============================================================
+🛍️ 5. Product Slice (API Integration)
+📄 store/slices/productSlice.js
+=============================================================
+🛍️ 6. Use Products in UI
+📄 pages/Products.jsx
+=============================================================
+🛒 7. Cart Slice
+📄 store/slices/cartSlice.js
+=============================================================
+🛍️ 8. Use Cart in ProductCard
+📄 ProductCard.jsx
+=============================================================	
+🛒 9. Cart Page (Redux Version)
+📄 pages/Cart.jsx  
+=============================================================
+🔐 10. Auth Slice (Login)
+📄 store/slices/authSlice.js
+=============================================================
+🔐 11. Use Login
+=============================================================
+🔐 🧠 1. Key Idea (VERY IMPORTANT)
+
+Instead of:
+
+❌ storing token in localStorage
+✅ we let backend store token in HTTP-only cookies
+
+Why?
+🔒 More secure (no XSS access)
+🍪 Automatically sent with requests
+🚫 No manual token handling in frontend
+=============================================================
+BACKEND-NEST JS APP:
+-------------------
+🛠️ 2. Backend (NestJS) Changes
+
+👉 In your Auth Controller
+
+📄 auth.controller.ts
+import { Response } from 'express';
+
+@Post('login')
+async login(
+  @Body() body: LoginDto,
+  @Res({ passthrough: true }) res: Response,
+) {
+  const result = await this.authService.login(body);
+
+  res.cookie('access_token', result.access_token, {
+    httpOnly: true,
+    secure: false, // true in production (HTTPS)
+    sameSite: 'lax',
+  });
+
+  return { message: 'Login successful' };
+}
+=============================================================
+BACKEND-NEST JS APP:
+-------------------
+🍪 3. Enable CORS with Cookies (IMPORTANT)
+📄 main.ts
+app.enableCors({
+  origin: "http://localhost:5173", // your Vite app
+  credentials: true,
+});
+=============================================================
+BACKEND-NEST JS APP:CHECK-ALREADY PRESENT
+-------------------
+🔍 6. How Backend Reads Cookie
+
+👉 Install:
+
+npm install cookie-parser
+📄 main.ts
+import * as cookieParser from 'cookie-parser';
+
+app.use(cookieParser());
+=============================================================
+BACKEND-NEST JS APP:
+-------------------
+🔐 7. Modify JWT Guard (Important)
+
+Instead of reading token from header:
+
+📄 jwt.strategy.ts
+import { ExtractJwt } from 'passport-jwt';
+
+jwtFromRequest: ExtractJwt.fromExtractors([
+  (req) => req?.cookies?.jwt,
+]),
+=============================================================
+🚪 8. Logout API
+📄 auth.controller.ts
+@Post('logout')
+logout(@Res({ passthrough: true }) res: Response) {
+  res.clearCookie('access_token');
+  return { message: 'Logged out' };
+}
+=============================================================
+🔓 9. Logout Frontend
+await api.post("/auth/logout");
+=============================================================
+🔥 5. Result 
+
+Now App Is:
+
+✅ Auto login after refresh
+
+👉 Because /auth/profile runs on load
+
+✅ Global user state
+
+👉 Accessible anywhere
+
+✅ Clean UI control
+
+👉 Show/hide Login, Cart, Orders
+
+✅ Proper logout
+
+👉 Clears Redux + cookie
+=============================================================
+⚡ Flow Summary
+Login → cookie set
+App loads → fetchProfile()
+Redux stores user
+UI updates automatically
+=============================================================
+🔥 RESULT
+✅ Admin-only pages
+✅ Role-based UI
+✅ Secure access
+=============================================================
+🛒 PHASE 2: Checkout Flow (Connect to Orders API)
+
+🧠 Flow Overview
+User adds items to cart
+Clicks Checkout
+Send cart → backend /orders
+Order created
+Clear cart
+=============================================================
+🏗️ 1. Create Order Slice
+📄 store/slices/orderSlice.js
+=============================================================
+🔗 2. Add to Store
+📄 store/store.js
+=============================================================	  
+🚀 Next Step (Very Powerful)
+
+Now your checkout works, next logical upgrades:
+
+👉 Add Order Success Page
+👉 Add Order History with details
+👉 Integrate Razorpay payment before placing order
+=============================================================
+💳 PART 2: Razorpay Payment Flow
+🧠 Flow Overview
+Frontend → /orders/create
+Backend → creates Razorpay order
+Frontend opens Razorpay popup
+Payment success → verify API
+Order confirmed ✅
+=============================================================
+👉 Click order → full order details page
+
+🛒 Order Details Page will show:
+Order ID
+Status (PAID / PLACED)
+Payment ID
+Total
+Date
+Items (name, qty, price, image)
+=============================================================
+TOAST:SWEETALERT2
+======
+Let’s implement a clean reusable toast system 👇
+
+🎯 1. Install SweetAlert2
+npm install sweetalert2
+=============================================================
+🧠 2. Create Reusable Toast Helper
+📄 src/utils/toast.js
+=============================================================
+npm i animate.css
+=============================================================
+🏁 NOW WE HAVE
+
+✅ Full E-commerce App
+✅ Auth (JWT + Cookies)
+✅ Razorpay
+✅ Orders UI
+✅ Redux
+✅ Toast Notifications
+=============================================================
+gvnaressh
+gvnaressh@gmail.com
+Gudimetla Venkata Naresh
+123456
+=============================================================
+✅ STEP-BY-STEP (SAFE WAY)
+🔧 Step 1: Update your schema.ts
+
+Add column:
+
+paymentId: text("payment_id"),
+
+👉 Example:
+
+export const orders = pgTable("ecom_nestjs_orders", {
+    orderId: serial("order_id").primaryKey(),
+    userId: integer("user_id"),
+    status: text("status"),
+    date: timestamp("date").defaultNow(),
+    amount: numeric("amount"),
+    total: numeric("total"),
+    ref: text("ref"),
+    paymentId: text("payment_id"), // ✅ ADD THIS
+    paymentMethod: text("payment_method"),
+});
+🔧 Step 2: Generate migration
+pnpm drizzle-kit generate
+
+👉 This creates a SQL file like:
+
+ALTER TABLE "ecom_nestjs_orders"
+ADD COLUMN "payment_id" text;
+🔧 Step 3: Apply migration
+pnpm drizzle-kit migrate
+🔥 RESULT
+
+✔ Only payment_id column added
+✔ Existing data untouched ✅
+✔ Other tables untouched ✅
+✔ Safe for Render DB ✅
+=============================================================
+ADDED NEW FIELD IN SCHEMA:
+--------------------------
+paymentId: varchar('payment_id', { length: 100 }), // razorpay_payment_id
+
+//✅ ORDERS TABLE
+export const orders = pgTable('ecom_nestjs_orders', {
+    orderId: serial('order_id').primaryKey(),
+
+    userId: integer('user_id')
+        .notNull()
+        .references(() => users.userId, { onDelete: 'cascade' }),
+
+    status: orderStatusEnum('status').notNull(),
+
+    date: timestamp('date').defaultNow(),
+
+    amount: numeric('amount', { precision: 10, scale: 2 }),
+    total: numeric('total', { precision: 10, scale: 2 }),
+
+    ref: varchar('ref', { length: 100 }), // razorpay_order_id
+    paymentId: varchar('payment_id', { length: 100 }), // razorpay_payment_id
+
+    paymentMethod: paymentEnum('payment_method').notNull(),
+});
+=============================================================
+pnpm drizzle-kit generate
+
+E:\MURALI\NEST-JS\ecommerce-backend>pnpm drizzle-kit generate
+No config path provided, using default 'drizzle.config.ts'
+Reading config file 'E:\MURALI\NEST-JS\ecommerce-backend\drizzle.config.ts'
+4 tables
+ecom_nestjs_orderitems 5 columns 0 indexes 2 fks
+ecom_nestjs_orders 9 columns 0 indexes 1 fks
+ecom_nestjs_products 7 columns 0 indexes 0 fks
+ecom_nestjs_users 12 columns 1 indexes 0 fks
+
+[✓] Your SQL migration file ➜ drizzle\0001_busy_nightcrawler.sql 🚀
+
+=======================================================================
+
+pnpm drizzle-kit migrate
+
+E:\MURALI\NEST-JS\ecommerce-backend>pnpm drizzle-kit migrate
+No config path provided, using default 'drizzle.config.ts'
+Reading config file 'E:\MURALI\NEST-JS\ecommerce-backend\drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] migrations applied successfully!
+E:\MURALI\NEST-JS\ecommerce-backend>
+=============================================================
+✅ FIX (FRONTEND ENV SETUP)
+🔧 Step 1: Create .env file (Vite)
+
+In your React project root:
+
+VITE_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxx
+
+👉 Use your Razorpay Dashboard → Test Key ID
+
+🔧 Step 2: Use it in code
+
+Replace this:
+
+key: "YOUR_KEY_ID"
+✅ With this:
+key: import.meta.env.VITE_RAZORPAY_KEY_ID
+🔥 Final Code
+const options = {
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID, // ✅ FIXED
+    amount: order.data.amount,
+    currency: "INR",
+    order_id: order.data.razorpayOrderId,
+⚠️ VERY IMPORTANT
+
+After adding .env:
+
+👉 Restart your dev server ❗
+
+npm run dev
+=============================================================
+UPI
+success@razorpay
+--------------------------------------------------
+google search razorpay dashboard
+https://dashboard.razorpay.com/app/dashboard
+Google signin id
+venkatdada369@gmail.com
+--------------------------------------------------
+=============================================================
+CHANGED THIS IN index.ts BACKEND SCHEMA
+export const orderStatusEnum = pgEnum('order_status', [
+  'PLACED',
+  'PAID',
+  'FAILED',
+  'SHIPPED',
+  'DELIVERED',
+  'CANCELLED',
+]);
+-------------------------------------------------------------
+
+E:\MURALI\NEST-JS\ecommerce-backend>pnpm drizzle-kit generate
+No config path provided, using default 'drizzle.config.ts'
+Reading config file 'E:\MURALI\NEST-JS\ecommerce-backend\drizzle.config.ts'
+4 tables
+ecom_nestjs_orderitems 5 columns 0 indexes 2 fks
+ecom_nestjs_orders 9 columns 0 indexes 1 fks
+ecom_nestjs_products 7 columns 0 indexes 0 fks
+ecom_nestjs_users 12 columns 1 indexes 0 fks
+
+[✓] Your SQL migration file ➜ drizzle\0002_medical_changeling.sql 🚀
+
+E:\MURALI\NEST-JS\ecommerce-backend>pnpm drizzle-kit migrate
+No config path provided, using default 'drizzle.config.ts'
+Reading config file 'E:\MURALI\NEST-JS\ecommerce-backend\drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] migrations applied successfully!
+E:\MURALI\NEST-JS\ecommerce-backend>
+=============================================================
+✅ 1. See all enums in PostgreSQL
+
+Run this query:
+
+SELECT typname 
+FROM pg_type 
+WHERE typtype = 'e';
+
+👉 This will list all enum types like:
+
+order_status
+user_role
+payment_status
+✅ 2. See values inside your enum (IMPORTANT)
+
+To see values of order_status:
+
+SELECT enumlabel 
+FROM pg_enum 
+WHERE enumtypid = (
+  SELECT oid FROM pg_type WHERE typname = 'order_status'
+);
+
+👉 Output will be like:
+
+PLACED
+PAID
+FAILED
+SHIPPED
+DELIVERED
+CANCELLED
+✅ 3. Best Query (with ordering)
+SELECT t.typname AS enum_name, e.enumlabel AS enum_value
+FROM pg_type t
+JOIN pg_enum e ON t.oid = e.enumtypid
+WHERE t.typname = 'order_status'
+ORDER BY e.enumsortorder;
+=============================================================
+IN STUDIO CHOOSE SQL CONSOLE AND RUN THIS COMMAND TO SEE ENUMS
+  SELECT e.enumlabel
+  FROM pg_type t
+  JOIN pg_enum e ON t.oid = e.enumtypid
+  WHERE t.typname = 'order_status'
+  ORDER BY e.enumsortorder
+=============================================================
+PLACED
+PAID
+FAILED
+SHIPPED
+DELIVERED
+CANCELLED
+==================================================================
+THIS FILE IS NOT REQUIRED BUT BETTER TO HAVE IT:tailwind.config.js
+-------------------------------------------------------------------
+✅ Correct Fix (Manual — very easy)
+
+Just create the config file manually 👇
+
+👉 Step 1: Create file
+
+Create this file in your project root:
+
+tailwind.config.js
+👉 Step 2: Paste this
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}", // ✅ VERY IMPORTANT
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+👉 Step 3: Restart Vite
+pnpm dev
+# or
+npm run dev
+=============================================================
+=============================================================
+=============================================================
+=============================================================	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+=============================================================
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install tailwindcss @tailwindcss/vite
+
+added 13 packages, and audited 165 packages in 11s
+
+37 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install @reduxjs/toolkit react-redux
+
+added 10 packages, and audited 175 packages in 6s
+
+38 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install axios react-router-dom
+
+added 27 packages, and audited 202 packages in 4s
+
+45 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================
+Microsoft Windows [Version 10.0.26100.8039]
+(c) Microsoft Corporation. All rights reserved.
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm i lucide-react
+
+added 1 package, and audited 205 packages in 54s
+
+46 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================
+
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install jwt-decode
+
+added 1 package, and audited 206 packages in 3s
+
+46 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install js-cookie
+
+added 1 package, and audited 207 packages in 2s
+
+46 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
+=============================================================
