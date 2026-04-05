@@ -28,13 +28,13 @@ export default function Orders() {
         <div className="max-w-4xl mx-auto px-2 sm:px-3 md:px-4">
 
             {/* Title */}
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">
                 📦 My Orders
             </h2>
 
             {/* Empty State */}
             {orders.length === 0 && (
-                <div className="text-center text-gray-500 text-sm">
+                <div className="text-center text-gray-500 text-base">
                     No orders found
                 </div>
             )}
@@ -52,11 +52,11 @@ export default function Orders() {
 
                             {/* Left */}
                             <div>
-                                <p className="font-semibold text-sm">
+                                <p className="font-semibold text-base sm:text-lg">
                                     #{order.orderId}
                                 </p>
 
-                                <span className="inline-block bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded mt-0.5">
+                                <span className="inline-block bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded mt-0.5">
                                     {order.ref}
                                 </span>
                             </div>
@@ -66,19 +66,19 @@ export default function Orders() {
                         </div>
 
                         {/* 🔹 DETAILS */}
-                        <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
-                            <p className="font-medium text-green-600">
+                        <div className="mt-2 flex justify-between items-center text-sm sm:text-base">
+                            <p className="font-semibold text-green-600">
                                 ₹ {order.total}
                             </p>
 
-                            <p className="text-gray-500 text-[11px] sm:text-xs">
+                            <p className="text-gray-500 text-xs sm:text-sm">
                                 {new Date(order.date).toLocaleString()}
                             </p>
                         </div>
 
                         {/* 🔹 CTA */}
                         <div className="mt-1 text-right">
-                            <span className="text-xs text-blue-500 hover:underline">
+                            <span className="text-sm text-blue-500 hover:underline">
                                 View →
                             </span>
                         </div>
