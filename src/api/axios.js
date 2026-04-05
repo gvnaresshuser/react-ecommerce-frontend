@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const api = axios.create({
+/* const api = axios.create({
     baseURL: "http://localhost:3000",
     withCredentials: true, // 🔥 MUST for cookies
+}); */
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+    withCredentials: true, // 🔥 MUST for cookies
 });
-
 // ❌ REMOVE token interceptor (not needed anymore)
 // Cookies are automatically sent with every request
 

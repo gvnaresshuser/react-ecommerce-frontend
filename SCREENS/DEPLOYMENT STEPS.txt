@@ -1,0 +1,187 @@
+LIVE FRONTEND REACT JS APP URL:
+------------------------------
+https://react-ecommerce-frontend-alpha.vercel.app
+
+LIVE BACKEND URL:
+----------------
+https://ecommerce-backend-1msn.onrender.com
+------------------------------------------------------------------------
+
+https://github.com/
+gvnaresshuser
+
+🧱 STEP 1: Push Code to GitHub
+✅ Initialize Git
+git init
+git add .
+git commit -m "Initial commit"
+
+✅ Create repo on GitHub
+
+Then:
+
+git remote add origin https://github.com/your-username/your-repo.git
+git remote add origin https://github.com/gvnaresshuser/react-ecommerce-frontend.git
+git branch -M main
+git push -u origin main
+
+=============================================================================================
+⚛️ STEP 2: Deploy React App (Vercel)
+🔥 Steps
+Go to Vercel
+Click "New Project"
+Import your GitHub repo
+Select your React folder (if monorepo)
+
+⚙️ Build Settings
+Setting	Value
+Framework	Vite / React
+Build Command	npm run build
+Output Dir	dist
+=============================================================================================
+https://vercel.com/gocarts-projects-cfc6dde7
+=============================================================================================
+LIVE FRONTEND REACT JS APP URL:
+------------------------------
+https://react-ecommerce-frontend-alpha.vercel.app
+=============================================================================================
+Deployment
+react-ecommerce-frontend-1k9fdgk8x-gocarts-projects-cfc6dde7.vercel.app
+Domains
+react-ecommerce-frontend-alpha.vercel.app
+Status
+Ready
+Created
+3m ago by gvnaresshuser
+
+github/gvnaresshuser
+Source
+main
+02190bb
+Initial commit
+=============================================================================================
+ANY CODE CHANGE...DO THIS
+
+git add .
+git commit -m "fixed login bug and improved UI"
+git push
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+
+
+
+
+
+========================================================================================================
+Microsoft Windows [Version 10.0.26100.8039]
+(c) Microsoft Corporation. All rights reserved.
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git init
+Initialized empty Git repository in E:/MURALI/NEST-JS/react-ecommerce-frontend/.git/
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git add .
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'eslint.config.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/icons.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/App copy.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/App.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/App.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/assets/vite.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/index copy.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'vite.config.js', LF will be replaced by CRLF the next time Git touches it
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git commit -m "Initial commit"
+[master (root-commit) 02190bb] Initial commit
+ 48 files changed, 6318 insertions(+)
+ create mode 100644 .env
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 SCREENS/DRIZZLE-STUDIO-SQL-CONSOLE.png
+ create mode 100644 SCREENS/Order Payment Details.png
+ create mode 100644 SCREENS/STEPS.txt
+ create mode 100644 SCREENS/test.png
+ create mode 100644 eslint.config.js
+ create mode 100644 index.html
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 public/favicon.svg
+ create mode 100644 public/icons.svg
+ create mode 100644 react-ecommerce-frontend-05-04-2026.zip
+ create mode 100644 src/App copy.jsx
+ create mode 100644 src/App.css
+ create mode 100644 src/App.jsx
+ create mode 100644 src/api/axios.js
+ create mode 100644 src/assets/hero.png
+ create mode 100644 src/assets/react.svg
+ create mode 100644 src/assets/vite.svg
+ create mode 100644 src/components/Navbar copy.jsx
+ create mode 100644 src/components/Navbar.jsx
+ create mode 100644 src/components/ProductCard.jsx
+ create mode 100644 src/components/ProtectedRoute.jsx
+ create mode 100644 src/components/RoleRoute.jsx
+ create mode 100644 src/components/StatusBadge.jsx
+ create mode 100644 src/components/TokenViewer.jsx
+ create mode 100644 src/index copy.css
+ create mode 100644 src/index.css
+ create mode 100644 src/main.jsx
+ create mode 100644 src/pages/AdminOrders.jsx
+ create mode 100644 src/pages/Cart.jsx
+ create mode 100644 src/pages/Login.jsx
+ create mode 100644 src/pages/OrderDetails copy.jsx
+ create mode 100644 src/pages/OrderDetails.jsx
+ create mode 100644 src/pages/Orders.jsx
+ create mode 100644 src/pages/Products.jsx
+ create mode 100644 src/pages/Register.jsx
+ create mode 100644 src/store/slices/authSlice.js
+ create mode 100644 src/store/slices/cartSlice.js
+ create mode 100644 src/store/slices/orderSlice.js
+ create mode 100644 src/store/slices/productSlice.js
+ create mode 100644 src/store/store.js
+ create mode 100644 src/utils/statusUtils.js
+ create mode 100644 src/utils/toast.js
+ create mode 100644 tailwind.config.js
+ create mode 100644 vite.config.js
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================================================
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git remote add origin https://github.com/gvnaresshuser/react-ecommerce-frontend.git
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git branch -M main
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git push -u origin main
+Enumerating objects: 60, done.
+Counting objects: 100% (60/60), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (57/57), done.
+Writing objects: 100% (60/60), 1.55 MiB | 815.00 KiB/s, done.
+Total 60 (delta 8), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (8/8), done.
+To https://github.com/gvnaresshuser/react-ecommerce-frontend.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
+=============================================================================================
