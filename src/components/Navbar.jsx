@@ -83,10 +83,17 @@ export default function Navbar() {
             {/* TOP NAVBAR */}
             <div className="flex justify-between items-center bg-black text-white p-4">
                 {/* Logo */}
-                <h1 className="flex items-center gap-2 text-lg font-semibold">
+                {/* <h1 className="flex items-center gap-2 text-lg font-semibold">
                     <ShoppingCart size={20} className="text-yellow-400" />
                     E-Commerce
-                </h1>
+                </h1> */}
+                <div className="flex justify-between items-center bg-black text-white p-4">
+                    {/* Logo */}
+                    <Link to="/" className="flex items-center gap-2 text-lg font-semibold">
+                        <ShoppingCart size={20} className="text-yellow-400" />
+                        E-Commerce
+                    </Link>
+                </div>
 
                 {/* DESKTOP MENU */}
                 <div className="hidden md:flex items-center gap-6">
