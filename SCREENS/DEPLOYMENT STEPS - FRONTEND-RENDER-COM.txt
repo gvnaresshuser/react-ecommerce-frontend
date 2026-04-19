@@ -1,0 +1,237 @@
+Deploying your React (Vite) frontend to Render as a static site is straightforward. 
+Step-by-step instructions** tailored for your repo.
+
+---
+
+# 🚀 Deploy React (Vite) App to Render (Static Site)
+
+---
+
+## ✅ Step 1: Prepare your project
+
+Make sure your React app builds correctly:
+
+```bash
+npm install
+npm run build
+```
+
+👉 This should create:
+
+```bash
+dist/   ✅ (important)
+```
+
+---
+
+## ✅ Step 2: Push latest code to GitHub
+
+Make sure your repo is updated:
+
+👉 GitHub repo:
+**react-ecommerce-frontend**
+
+```bash
+git add .
+git commit -m "Ready for deployment"
+git push
+```
+
+---
+
+## ✅ Step 3: Login to Render
+
+Go to:
+
+👉 [https://render.com](https://render.com)
+Login using GitHub
+
+---
+
+## ✅ Step 4: Create Static Site
+
+1. Click **New +**
+2. Select **Static Site**
+3. Connect your GitHub repo:
+   👉 `react-ecommerce-frontend`
+
+---
+
+## ✅ Step 5: Configure Build Settings
+
+Fill like this:
+
+### 🔧 Basic Settings
+
+* **Name**: `react-ecommerce-frontend`
+* **Branch**: `main`
+
+---
+
+### ⚙️ Build Settings (IMPORTANT)
+
+```bash
+Build Command: pnpm install && pnpm build
+Publish Directory: dist
+```
+
+👉 If using npm:
+
+```bash
+npm install && npm run build
+```
+
+---
+
+## ✅ Step 6: Add Environment Variables (VERY IMPORTANT)
+
+Click **Environment → Add Environment Variable**
+
+Add:
+
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
+
+👉 Replace with your backend URL
+
+---
+
+## ✅ Step 7: Deploy
+
+Click:
+
+👉 **Create Static Site**
+
+---
+
+## ⏳ Wait for deployment
+
+You’ll see logs like:
+
+```bash
+Installing dependencies...
+Building project...
+Deploy successful ✅
+```
+
+---
+
+## 🌐 Final Output
+
+You’ll get URL like:
+
+```bash
+https://react-ecommerce-frontend.onrender.com
+```
+
+---
+
+# ⚠️ IMPORTANT FIX (React Router Issue)
+
+If you are using React Router:
+
+👉 Add file:
+
+## 📄 `public/_redirects`
+
+```bash
+/*    /index.html   200
+```
+
+👉 This prevents 404 on refresh
+
+---
+
+# ⚠️ CORS Check (Backend)
+
+Make sure your NestJS backend allows:
+
+```ts
+origin: "https://react-ecommerce-frontend.onrender.com"
+```
+
+---
+
+# 🔥 Bonus: Auto Deploy
+
+✔ Every GitHub push → auto deploy
+✔ No manual steps needed
+
+---
+
+# 🎯 Final Checklist
+
+✔ Repo pushed
+✔ Build command set
+✔ `dist` folder generated
+✔ Env variables added
+✔ Backend URL updated
+
+---
+
+# 💡 Pro Tip
+
+For Vite apps:
+
+👉 Always use:
+
+```env
+VITE_*
+```
+
+Example:
+
+```env
+VITE_API_URL=...
+```
+
+---
+
+# 🎯 Final Answer
+
+✔ Use **Static Site on Render**
+✔ Build: `pnpm install && pnpm build`
+✔ Publish: `dist`
+✔ Add env vars
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft Windows [Version 10.0.26100.8039]
+(c) Microsoft Corporation. All rights reserved.
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm install
+
+up to date, audited 207 packages in 2s
+
+46 packages are looking for funding
+  run `npm fund` for details
+
+3 vulnerabilities (2 moderate, 1 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>npm run build
+
+> react-ecommerce-frontend@0.0.0 build
+> vite build
+
+vite v8.0.3 building client environment for production...
+✓ 1809 modules transformed.
+computing gzip size...
+dist/index.html                   0.47 kB │ gzip:   0.30 kB
+dist/assets/index-CqdR8pYl.css   28.89 kB │ gzip:   5.96 kB
+dist/assets/index-BhBr9_YL.js   402.15 kB │ gzip: 125.94 kB
+
+[PLUGIN_TIMINGS] Warning: Your build spent significant time in plugins. Here is a breakdown:
+  - rolldown:vite-resolve (72%)
+  - @tailwindcss/vite:generate:build (18%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 11.06s
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
