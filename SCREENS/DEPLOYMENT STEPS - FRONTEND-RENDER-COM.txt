@@ -235,3 +235,48 @@ See https://rolldown.rs/options/checks#plugintimings for more details.
 ✓ built in 11.06s
 
 E:\MURALI\NEST-JS\react-ecommerce-frontend>
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git add .
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   SCREENS/DEPLOYMENT STEPS - FRONTEND-RENDER-COM.txt
+        new file:   SCREENS/Deploy React (Vite) App to Render (Static Site).png
+        new file:   public/_redirects
+
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git commit -m "Ready for deployment"
+[main 6aec187] Ready for deployment
+ 3 files changed, 238 insertions(+)
+ create mode 100644 SCREENS/DEPLOYMENT STEPS - FRONTEND-RENDER-COM.txt
+ create mode 100644 SCREENS/Deploy React (Vite) App to Render (Static Site).png
+ create mode 100644 public/_redirects
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>git push
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 503.69 KiB | 19.37 MiB/s, done.
+Total 7 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/gvnaresshuser/react-ecommerce-frontend.git
+   0415adb..6aec187  main -> main
+
+E:\MURALI\NEST-JS\react-ecommerce-frontend>
+
+
+BACKEND RENDER.COM LIVE URL
+https://ecommerce-backend-1msn.onrender.com
+
+FRONTEND RENDER.COM LIVE URL
+https://react-ecommerce-frontend-z6xo.onrender.com
+
+
+https://react-ecommerce-frontend-alpha.vercel.app
