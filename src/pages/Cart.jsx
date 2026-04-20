@@ -9,7 +9,7 @@ import { placeOrder } from "../store/slices/orderSlice";
 import { showToast } from "../utils/toast";
 import { clearCart } from "../store/slices/cartSlice";
 import api from "../api/axios";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [loading, setLoading] = useState(false);
@@ -41,43 +41,45 @@ export default function Cart() {
             return;
         }
         try {
-        const order = await api.post("/orders/razorpay/create-order", {
-            items: items.map(i => ({
-                productId: i.productId,
-                quantity: i.quantity,
-            })),
-            paymentMethod: "RAZORPAY",
-        });
-        //key: "YOUR_KEY_ID",
-        const options = {            
-            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-            amount: order.data.amount,
-            currency: "INR",
-            order_id: order.data.razorpayOrderId,
+            const order = await api.post("/orders/razorpay/create-order", {
+                items: items.map(i => ({
+                    productId: i.productId,
+                    quantity: i.quantity,
+                })),
+                paymentMethod: "RAZORPAY",
+            });
+            //key: "YOUR_KEY_ID",
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: order.data.amount,
+                currency: "INR",
+                order_id: order.data.razorpayOrderId,
 
-            handler: async function (response) {
-                // 🔥 VERIFY PAYMENT
-                await api.post("/orders/razorpay/verify", response);
+                handler: async function (response) {
+                    //https://razorpay.com/docs/payments/third-party-validation/standard-integration?activeTab=on-payment-failure&search-string=response%20checkout
+                    console.log('RESPONSE:', response);
+                    // 🔥 VERIFY PAYMENT
+                    await api.post("/orders/razorpay/verify", response);
 
-                //alert("Payment successful 🎉");
-                
-                showToast("success", "Order placed successfully 🛒");
+                    //alert("Payment successful 🎉");
 
-                // clear cart
-                //items.forEach(item => dispatch(removeFromCart(item.id)));
-                dispatch(clearCart());
-                setLoading(false); // ✅ stop loading
-                navigate("/orders");
-            },
-        };
+                    showToast("success", "Order placed successfully 🛒");
 
-        const rzp = new window.Razorpay(options);
+                    // clear cart
+                    //items.forEach(item => dispatch(removeFromCart(item.id)));
+                    dispatch(clearCart());
+                    setLoading(false); // ✅ stop loading
+                    navigate("/orders");
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
             rzp.on("payment.failed", function () {
                 showToast("error", "Payment failed ❌");
                 setLoading(false); // ✅ stop loading
             });
 
-        rzp.open();
+            rzp.open();
         } catch (err) {
             showToast("error", "Something went wrong ❌");
             setLoading(false);

@@ -280,3 +280,9 @@ https://react-ecommerce-frontend-z6xo.onrender.com
 
 
 https://react-ecommerce-frontend-alpha.vercel.app
+
+OLD
+postgresql://pern_store_user:vKYBVwPxADEKfk5ibKG0fieFsSGm2IE2@dpg-d6slnslm5p6s73atcljg-a.singapore-postgres.render.com/perns_store_r9l1?sslmode=verify-full
+
+NEW
+postgresql://pern_store_user:NsaWhmupwHKzJfkKH4MhX2ls2n3ZbJng@dpg-d7gnn8v7f7vs73d7h050-a.singapore-postgres.render.com/pern_store_fab5?sslmode=verify-full

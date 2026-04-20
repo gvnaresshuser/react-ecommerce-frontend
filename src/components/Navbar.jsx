@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import api from "../api/axios";
 import { logout } from "../store/slices/authSlice";
 import { showToast } from "../utils/toast";
-import { User ,Key, X, Settings, LogOut, ShoppingCart, Menu, FileText, Package } from "lucide-react";
+import { User, Key, X, Settings, LogOut, ShoppingCart, Menu, FileText, Package } from "lucide-react";
 import { jwtDecode } from "jwt-decode";
 
 export default function Navbar() {
@@ -142,26 +142,26 @@ export default function Navbar() {
                     />
                 </div>
                 {/* Header */}
-             
+
 
                 <div className="flex flex-col gap-4 p-4">
                     <MenuLinks />
 
                     {isAuth && (
                         <>
-                       {/*  <button
+                            {/*  <button
                             onClick={() => setShowToken(true)}
                             className="p-2 bg-orange-400 rounded w-fit"
                         >
                             <Key size={18} />
                         </button> */}
-                        <button
+                            <button
                                 onClick={() => setShowToken(true)}
                                 className="bg-orange-500 px-3 py-1 rounded flex items-center gap-1"
-                >
-                <Key size={16} /> Token
-                </button>
-                </>
+                            >
+                                <Key size={16} /> Token
+                            </button>
+                        </>
                     )}
                     {isAuth && (
                         <div className="flex items-center gap-2">
@@ -259,3 +259,63 @@ export default function Navbar() {
         </>
     );
 }
+/*
+const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
+✅ What is acc?
+
+👉 acc = accumulator
+
+It is a variable that:
+
+stores the running total
+carries the value from one iteration to the next
+🔄 How reduce() works
+
+Syntax:
+
+array.reduce((accumulator, currentValue) => {}, initialValue)
+
+In your case:
+
+acc → accumulator (running total)
+item → current item in array
+0 → initial value of acc
+🧠 Step-by-step example
+const items = [
+  { name: "A", quantity: 2 },
+  { name: "B", quantity: 3 },
+  { name: "C", quantity: 5 }
+];
+Iteration flow:
+
+1️⃣ First iteration
+
+acc = 0
+item.quantity = 2
+acc = 0 + 2 = 2
+
+2️⃣ Second iteration
+
+acc = 2
+item.quantity = 3
+acc = 2 + 3 = 5
+
+3️⃣ Third iteration
+
+acc = 5
+item.quantity = 5
+acc = 5 + 5 = 10
+🎯 Final result
+cartCount = 10
+💡 Simple meaning
+
+👉 acc = “total so far”
+
+🧩 You can rename it
+
+acc is just a variable name:
+
+const cartCount = items.reduce((total, item) => total + item.quantity, 0);
+
+Same result 👍
+*/
